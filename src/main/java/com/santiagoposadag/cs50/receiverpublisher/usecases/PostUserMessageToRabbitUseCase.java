@@ -23,7 +23,7 @@ public class PostUserMessageToRabbitUseCase implements Function<UserDto, Mono<Us
 
     @Override
     public Mono<UserDto> apply(@Validated UserDto userDto) {
-        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE, UserDto.getRoutingKey(), gson.toJson(userDto));
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE, userDto.getRoutingKey(), gson.toJson(userDto));
         return Mono.just(userDto);
     }
 }
